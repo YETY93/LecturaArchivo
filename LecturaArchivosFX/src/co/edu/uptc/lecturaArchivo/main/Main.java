@@ -1,4 +1,4 @@
-package application;
+package co.edu.uptc.lecturaArchivo.main;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;

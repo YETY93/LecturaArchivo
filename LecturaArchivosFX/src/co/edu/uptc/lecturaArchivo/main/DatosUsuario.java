@@ -42,8 +42,8 @@ public class DatosUsuario {
 	}
 	@Override
 	public String toString() {
-		return "Negocio [nombre=" + nombre + ", primerApellido=" + primerApellido + ", segundoApellido="
-				+ segundoApellido + ", cidudadNatal=" + cidudadNatal + ", genero=" + genero + "]";
+		return "Negocio [nombre=" + nombre.toUpperCase() + ", primerApellido=" + primerApellido.toUpperCase() + ", segundoApellido="
+				+ segundoApellido.toUpperCase() + ", cidudadNatal=" + cidudadNatal.toUpperCase() + ", genero=" + genero.toUpperCase() + "]";
 	}
 	
 	

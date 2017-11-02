@@ -15,7 +15,10 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <TextArea fx:id="areaTexto" prefHeight="113.0" prefWidth="324.0" BorderPane.alignment="CENTER" />
+            <TextArea fx:id="areaTexto" prefHeight="113.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding></TextArea>
          </center></BorderPane>
    </center>
    <top>
@@ -27,6 +30,7 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -35,13 +39,15 @@
          </BorderPane.margin>
          <children>
             <Label text="Nombre" />
-            <Label text="Apellido" GridPane.rowIndex="1" />
-            <Label text="Lugar de nacimiento" GridPane.rowIndex="2" />
-            <Label text="Genero" GridPane.rowIndex="3" />
+            <Label text="Primer apellido" GridPane.rowIndex="1" />
+            <Label text="Segundo apellido" GridPane.rowIndex="2" />
+            <Label text="Ciudad Natal" GridPane.rowIndex="3" />
+            <Label text="Genero" GridPane.rowIndex="4" />
             <TextField fx:id="txtNombre" GridPane.columnIndex="1" />
             <TextField fx:id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtLugar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtGenero" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
          <padding>
             <Insets left="20.0" />

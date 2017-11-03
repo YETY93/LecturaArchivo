@@ -56,7 +56,7 @@ public class CtrDatosPersonales implements Initializable {
 		PrintWriter escribirArchivo;
 		
 	
-			datos = new File("C:\\Users\\Usuario\\git\\LecturaArchivo\\LecturaArchivosFX\\src\\co\\edu\\uptc\\lecturaArchivo\\ctr\\datosUsario.txt");
+			datos = new File("C:\\Users\\Usuario\\Desktop\\datosUsario.txt");
 			escritura = new FileWriter(datos);
 			bufferEscritura = new BufferedWriter(escritura);
 			escribirArchivo = new PrintWriter(bufferEscritura);
@@ -84,7 +84,7 @@ public class CtrDatosPersonales implements Initializable {
 		
 		try {
 			
-			datosMostrar = new File("C:\\Users\\Usuario\\git\\LecturaArchivo\\LecturaArchivosFX\\src\\co\\edu\\uptc\\lecturaArchivo\\ctr\\datosUsario.txt");
+			datosMostrar = new File("C:\\Users\\Usuario\\Desktop\\datosUsario.txt");
 			lecturaDatos = new FileReader(datosMostrar);
 			buferLectura = new BufferedReader(lecturaDatos);
 			

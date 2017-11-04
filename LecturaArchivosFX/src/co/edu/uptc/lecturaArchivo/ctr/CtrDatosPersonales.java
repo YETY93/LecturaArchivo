@@ -14,6 +14,7 @@ import co.edu.uptc.lecturaArchivo.main.DatosUsuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -42,14 +43,26 @@ public class CtrDatosPersonales implements Initializable {
 	
 	public void GuardarDatos(ActionEvent event) {
 		try {
+			
+			// creacion del objeto para asignar datos
 		DatosUsuario nuevo1 = new DatosUsuario();
 		nuevo1.setNombre(txtNombre.getText());
 		nuevo1.setPrimerApellido(txtApellidoUno.getText());
 		nuevo1.setSegundoApellido(txtApellidoDos.getText());
 		nuevo1.setCidudadNatal(txtNatalidad.getText());
 		nuevo1.setGenero(txtGenero.getText());
-
-
+			// cracion del mensaje alert para informacion 
+			// de los datos a guardar
+		
+		Alert datosGuardados = new Alert(Alert.AlertType.INFORMATION);
+		datosGuardados.setTitle("Datos a guardar");
+		datosGuardados.setHeaderText("Estos son los datos a guardar");
+		datosGuardados.setContentText(nuevo1.toString());
+		
+		
+		datosGuardados.show();
+		
+		//creacion del archivo para realizar la escritura
 		File datos;
 		FileWriter escritura;
 		BufferedWriter bufferEscritura;
@@ -77,6 +90,10 @@ public class CtrDatosPersonales implements Initializable {
 	
 	
 	public void mostarDatos(ActionEvent event) {
+		
+		
+		//Se realiza la lectura del archico creado en eel metoso anterior
+		
 		
 		File datosMostrar;
 		FileReader lecturaDatos;

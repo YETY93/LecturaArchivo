@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 
@@ -17,7 +16,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			this.primaryStage = primaryStage;
-			this.primaryStage.setTitle("Lectura archivo");
+			this.primaryStage.setTitle("Escritura y lectura de un archivo");
 			// load root layout from fxml file
             FXMLLoader myLoader = new FXMLLoader();
             myLoader.setLocation(Main.class.getResource("/co/edu/uptc/lectuArhivo/gui/VentanaPrincipal.fxml"));

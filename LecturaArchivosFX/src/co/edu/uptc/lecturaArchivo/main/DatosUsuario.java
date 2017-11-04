@@ -42,7 +42,7 @@ public class DatosUsuario {
 	}
 	@Override
 	public String toString() {
-		return "Negocio [nombre=" + nombre + ", primerApellido=" + primerApellido+ ", segundoApellido="
+		return "Datos del Usuario [nombre=" + nombre + ", primerApellido=" + primerApellido+ ", segundoApellido="
 				+ segundoApellido+ ", cidudadNatal=" + cidudadNatal + ", genero=" + genero + "]";
 	}
 	

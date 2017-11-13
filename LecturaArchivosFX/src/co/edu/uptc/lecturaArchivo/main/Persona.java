@@ -1,6 +1,6 @@
 package co.edu.uptc.lecturaArchivo.main;
 
-public class DatosUsuario {
+public class Persona {
 	
 	private String nombre;
 	private String primerApellido;

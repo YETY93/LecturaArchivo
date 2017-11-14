@@ -4,8 +4,9 @@
 }
 
 #guardarComo{
-	-fx-text-fill: rgb(  46, 64, 83 );
-	-fx-font-weight: bold;
+	-fx-text-fill: rgb(   76, 23, 28  );
+	-fx-font-weight:bold;
+	-fx-font-size: 14px;
 }
 
 .label{

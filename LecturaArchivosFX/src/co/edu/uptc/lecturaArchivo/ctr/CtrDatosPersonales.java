@@ -1,15 +1,22 @@
 package co.edu.uptc.lecturaArchivo.ctr;
 
 import java.io.FileNotFoundException;
-import java.net.URL; 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import co.edu.uptc.lecturaArchivo.main.Persona;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -18,24 +25,40 @@ public class CtrDatosPersonales implements Initializable {
 	
 	
 		@FXML
-		private TextField	txtNombArchivo;
+		private TextField			txtNombArchivo;
 		@FXML
-		private TextField 	txtNombre;
+		private TextField 			txtNombre;
 		@FXML
-		private TextField 	txtApellidoUno;
+		private TextField 			txtApellidoUno;
 		@FXML
-		private TextField	txtApellidoDos;
+		private TextField			txtApellidoDos;
 		@FXML
-		private TextField	txtNatalidad;
+		private TextField			txtNatalidad;
 		@FXML
-		private TextField	txtGenero;
+		private TextField			txtGenero;
 		@FXML
-		private Button		guardar;
+		private Button				guardar;
 		@FXML
-		private Button 		capturaInformacion;
+		private Button 				capturaInformacion;
 		@FXML
-		private TextArea 	areaTexto;
+		private TextArea 			areaTexto;
+		@FXML
+		private TableView <Persona> tablaDatosPerso;
+		@FXML
+		private TableColumn<Persona, String> colNombre;
+		@FXML
+		private TableColumn<Persona, String> colApellido1;
+		@FXML
+		private TableColumn<Persona, String> colApellido2;
+		@FXML
+		private TableColumn<Persona, String> colCiudad;
+		@FXML
+		private TableColumn<Persona, String> colGenero;
+	
 		
+		
+		
+	//////////// METODO QUE CREA LOS ARCHIVOS TXT 
 	
 	public void GuardarDatos(ActionEvent event) {
 		try {
@@ -52,9 +75,19 @@ public class CtrDatosPersonales implements Initializable {
 		nuevaPerso.setCidudadNatal(txtNatalidad.getText());
 		nuevaPerso.setGenero(txtGenero.getText());
 		
+		
 		// metodo  crea Rachivo del objeto archivoTxt 
 		archivoTxt.creaArchivo(nuevaPerso,txtNombArchivo.getText());
 		
+		if (txtNombArchivo.getText().isEmpty()) {
+			Alert faltaInformacion = new Alert(Alert.AlertType.WARNING);
+			faltaInformacion.setTitle("Campo vacio");
+			faltaInformacion.setHeaderText("No hay datos a guardar");
+			faltaInformacion.setContentText("EL campo Guardar como esta vacio");
+			
+			faltaInformacion.show();
+			
+		}else {
 		
 			// cracion del mensaje alert para informacion 
 			// de los datos a guardar
@@ -64,6 +97,7 @@ public class CtrDatosPersonales implements Initializable {
 		datosGuardados.setContentText(nuevaPerso.toString());
 		
 		datosGuardados.show();
+		}
 	
 		// lanza la eceocion si algo sale mal
 		
@@ -77,11 +111,42 @@ public class CtrDatosPersonales implements Initializable {
 	}
 
 	
-	public void mostarDatos(ActionEvent event) {
-		CargarArchivoTXT carga1 = new CargarArchivoTXT();
+	
+	
+	/////// METODO QUE LEE LOS ARCHIVOS TXT 
+	
+	public void leeDatosArchivo(ActionEvent event) {
+		
 			
 		try {
-			carga1.lecturaAchivo(areaTexto,txtNombArchivo.getText() );
+			
+		
+			CargarArchivoTXT carga1 = new CargarArchivoTXT();
+			String datosObtTXT = null;
+			carga1.lecturaAchivo(txtNombArchivo.getText(), datosObtTXT);
+			
+			List <String> datosObten = new ArrayList<String>();
+			ObservableList<String> obsListDtosObten = FXCollections.observableList(datosObten);
+			
+			
+			String lectura;
+			lectura = carga1.toString();
+			while (lectura.isEmpty() ) {
+				
+				if (lectura.contains("|")) {
+				String[] divisionDatos = lectura.split(Pattern.quote("|"));
+				obsListDtosObten.add(divisionDatos[0].toUpperCase());
+				obsListDtosObten.add(divisionDatos[1].toUpperCase());
+				obsListDtosObten.add(divisionDatos[2].toUpperCase());
+				obsListDtosObten.add(divisionDatos[3].toUpperCase());
+				obsListDtosObten.add(divisionDatos[4].toUpperCase());
+				
+				
+				}else {
+					System.out.println("Falta caracter \"|\" ");
+				}
+			}
+			
 		} catch (FileNotFoundException e) {
 			Alert archivoPerdido = new Alert(Alert.AlertType.WARNING);
 			archivoPerdido.setHeaderText("Archivo no se encuentra en la ruta");
@@ -96,7 +161,6 @@ public class CtrDatosPersonales implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+	
 	}
-
 }

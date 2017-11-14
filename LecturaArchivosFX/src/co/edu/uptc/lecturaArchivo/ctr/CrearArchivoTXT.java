@@ -14,7 +14,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TextField;
 
 public class CrearArchivoTXT {
 	
@@ -51,14 +50,16 @@ public class CrearArchivoTXT {
 					escribeArchivo.append(obListDtsPersona.get(2).toString().toUpperCase());
 					escribeArchivo.append(obListDtsPersona.get(3).toString().toUpperCase());
 					escribeArchivo.append(obListDtsPersona.get(4).toString().toUpperCase());
+					escribeArchivo.append("\n");
 				}else {
 					// Escribe los datos en el archivo de texto, tomados de la ObservableList
-					escribeArchivo.write("\n");
-					escribeArchivo.write(obListDtsPersona.get(0).toString().toUpperCase());
+					
+					escribeArchivo.write (obListDtsPersona.get(0).toString().toUpperCase());
 					escribeArchivo.append(obListDtsPersona.get(1).toString().toUpperCase());
 					escribeArchivo.append(obListDtsPersona.get(2).toString().toUpperCase());
 					escribeArchivo.append(obListDtsPersona.get(3).toString().toUpperCase());
 					escribeArchivo.append(obListDtsPersona.get(4).toString().toUpperCase());
+					escribeArchivo.append("\n");
 				
 				}
 

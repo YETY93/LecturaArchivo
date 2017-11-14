@@ -19,13 +19,13 @@
             <Insets top="5.0" />
          </BorderPane.margin>
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tablaDatosPerso" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="tableViewDts" prefWidth="75.0" text="Nombre" />
-                <TableColumn fx:id="tableViewDts" prefWidth="81.0" text="1°.  Apellido" />
-                  <TableColumn fx:id="tableViewDts" prefWidth="79.0" text="2°. Apellido" />
-                  <TableColumn fx:id="tableViewDts" prefWidth="96.0" text="Ciudad Natal" />
-                  <TableColumn fx:id="tableViewDts" prefWidth="59.0" text="Genero" />
+                <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+                <TableColumn fx:id="colApellido1" prefWidth="81.0" text="1°.  Apellido" />
+                  <TableColumn fx:id="colApellido2" prefWidth="79.0" text="2°. Apellido" />
+                  <TableColumn fx:id="colCiudad" prefWidth="96.0" text="Ciudad Natal" />
+                  <TableColumn fx:id="colGenero" prefWidth="59.0" text="Genero" />
               </columns>
             </TableView>
          </center></BorderPane>
@@ -109,7 +109,7 @@
                   <Insets left="60.0" right="50.0" top="8.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="capturaInformacion" mnemonicParsing="false" onAction="#mostarDatos" prefHeight="25.0" prefWidth="130.0" text="Mostrar">
+            <Button fx:id="capturaInformacion" mnemonicParsing="false" onAction="#leeDatosArchivo" prefHeight="25.0" prefWidth="130.0" text="Mostrar">
                <HBox.margin>
                   <Insets left="30.0" right="40.0" top="8.0" />
                </HBox.margin>

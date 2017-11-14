@@ -4,15 +4,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 public class CargarArchivoTXT {
 	
 
-	public void lecturaAchivo(TextArea texto, String nombreArchivo ) throws FileNotFoundException {
+	public String lecturaAchivo(String nombreArchivo, String strDats) throws FileNotFoundException {
 		try {
 			File			ubicacionArchivo;
 			FileReader		leeArchivo;
@@ -22,16 +26,22 @@ public class CargarArchivoTXT {
 			leeArchivo =		new FileReader(ubicacionArchivo);
 			buferLectura =		new BufferedReader(leeArchivo);
 			
-			String lectura;
-			while ((lectura = buferLectura.readLine())!= null ) {
-				texto.appendText(lectura.toString().toUpperCase());
-				texto.appendText("\n");
-			}
+			
+			while ((strDats = buferLectura.readLine())!= null ) {
+				System.out.println(strDats);
+			
+			Alert datosEncontrados = new Alert(Alert.AlertType.INFORMATION);
+			datosEncontrados.setHeaderText(" Se ha encuentrado lo siguiente");
+			datosEncontrados.setContentText(strDats );
+			datosEncontrados.show();
+			
 			
 			leeArchivo	.close();
 			buferLectura.close();
 			
-		} catch (Exception e) {
+		} 
+		}
+		catch (Exception e) {
 			
 			Alert archivoPerdido = new Alert(Alert.AlertType.WARNING);
 			archivoPerdido.setHeaderText("Archivo no se encuentra en la ruta");
@@ -40,6 +50,7 @@ public class CargarArchivoTXT {
 			
 			archivoPerdido.show();
 		}
+		return strDats;
 
 	}
 }

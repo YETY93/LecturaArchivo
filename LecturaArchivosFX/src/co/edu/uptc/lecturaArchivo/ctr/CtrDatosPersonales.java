@@ -1,6 +1,8 @@
 package co.edu.uptc.lecturaArchivo.ctr;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
+
+
 
 public class CtrDatosPersonales implements Initializable {
 	
@@ -60,21 +65,19 @@ public class CtrDatosPersonales implements Initializable {
 		
 	//////////// METODO QUE CREA LOS ARCHIVOS TXT 
 	
-	public void GuardarDatos(ActionEvent event) {
+	public void guardarDatos(ActionEvent event) {
+		Persona 		nuevaPerso;
+		CrearArchivoTXT	archivoTxt;
 		try {
 					
 			// creacion de obejo persona y la escritura de archivo
 			
-		Persona 		nuevaPerso 	= new Persona();
-		CrearArchivoTXT	archivoTxt  = new CrearArchivoTXT();
+		nuevaPerso 	= new Persona(txtNombre.getText(), txtApellidoUno.getText(),
+				txtApellidoDos.getText(), txtNatalidad.getText(),
+				txtGenero.getText());
 		
-		
-		nuevaPerso.setNombre(txtNombre.getText());
-		nuevaPerso.setPrimerApellido(txtApellidoUno.getText());
-		nuevaPerso.setSegundoApellido(txtApellidoDos.getText());
-		nuevaPerso.setCidudadNatal(txtNatalidad.getText());
-		nuevaPerso.setGenero(txtGenero.getText());
-		
+		archivoTxt  = new CrearArchivoTXT();
+
 		
 		// metodo  crea Rachivo del objeto archivoTxt 
 		archivoTxt.creaArchivo(nuevaPerso,txtNombArchivo.getText());
@@ -94,7 +97,12 @@ public class CtrDatosPersonales implements Initializable {
 		Alert datosGuardados = new Alert(Alert.AlertType.INFORMATION);
 		datosGuardados.setTitle("Datos a guardar");
 		datosGuardados.setHeaderText("Estos son los datos a guardar");
-		datosGuardados.setContentText(nuevaPerso.toString());
+		datosGuardados.setContentText(
+			  "Nombre                 : "+ nuevaPerso.getNombre()
+			+ "\n" + "Primer Apellido     : "+ nuevaPerso.getPrimerApellido()
+			+ "\n" + "Segundo Apellido : "+ nuevaPerso.getSegundoApellido()
+			+ "\n" + "Ciudad Natal	      : "+ nuevaPerso.getCidudadNatal()
+			+ "\n" + "Genero                  : "+ nuevaPerso.getGenero());
 		
 		datosGuardados.show();
 		}
@@ -113,49 +121,92 @@ public class CtrDatosPersonales implements Initializable {
 	
 	
 	
-	/////// METODO QUE LEE LOS ARCHIVOS TXT 
+	/////// ACCIÓN QUE LEE LOS ARCHIVOS TXT 
 	
 	public void leeDatosArchivo(ActionEvent event) {
 		
-			
+		File				ubicacionArchivo;
+		FileReader			leeArchivo;
+		BufferedReader		buferLectura;
+		List<String>        arrayDatosDiv;
+		String          	strDats;
+		String				separador;
+		
+
 		try {
 			
 		
-			CargarArchivoTXT carga1 = new CargarArchivoTXT();
-			String datosObtTXT = null;
-			carga1.lecturaAchivo(txtNombArchivo.getText(), datosObtTXT);
+			ubicacionArchivo =	new File ("C:\\Users\\Usuario\\Desktop\\"+
+			txtNombArchivo.getText()+".txt");
 			
-			List <String> datosObten = new ArrayList<String>();
-			ObservableList<String> obsListDtosObten = FXCollections.observableList(datosObten);
+			leeArchivo       =	new FileReader(ubicacionArchivo);
+			buferLectura     =	new BufferedReader(leeArchivo);
+			arrayDatosDiv	 =  new ArrayList<String>();
+			separador		 =  Pattern.quote("|");
+		
+		
 			
 			
-			String lectura;
-			lectura = carga1.toString();
-			while (lectura.isEmpty() ) {
+			while ((strDats = buferLectura.readLine())!= null ) {
+				String[] divisionDatos = strDats.split(separador);
+				arrayDatosDiv.add(divisionDatos[0]);
+				arrayDatosDiv.add(divisionDatos[1]);
+				arrayDatosDiv.add(divisionDatos[2]);
+				arrayDatosDiv.add(divisionDatos[3]);
+				arrayDatosDiv.add(divisionDatos[4]);
 				
-				if (lectura.contains("|")) {
-				String[] divisionDatos = lectura.split(Pattern.quote("|"));
-				obsListDtosObten.add(divisionDatos[0].toUpperCase());
-				obsListDtosObten.add(divisionDatos[1].toUpperCase());
-				obsListDtosObten.add(divisionDatos[2].toUpperCase());
-				obsListDtosObten.add(divisionDatos[3].toUpperCase());
-				obsListDtosObten.add(divisionDatos[4].toUpperCase());
+
 				
-				
-				}else {
-					System.out.println("Falta caracter \"|\" ");
-				}
-			}
+				//System.out.println(strDats);
+
+			Alert datosEncontrados = new Alert(Alert.AlertType.INFORMATION);
+			datosEncontrados.setHeaderText(" Se ha encuentrado lo siguiente");
+			datosEncontrados.setContentText(strDats );
+			datosEncontrados.show();
 			
-		} catch (FileNotFoundException e) {
-			Alert archivoPerdido = new Alert(Alert.AlertType.WARNING);
-			archivoPerdido.setHeaderText("Archivo no se encuentra en la ruta");
-			archivoPerdido.setContentText("No se encuentra el archivo a cargar , por favor guarde"
-					+ "\n la informacion,despues precione el boton mostrar" );
-			archivoPerdido.show();
-		}
+			
+			
+			} 
+		    final ObservableList<Persona> datosOptDiv = FXCollections.observableArrayList(
+		            new Persona(arrayDatosDiv.get(0), arrayDatosDiv.get(1),  
+		            		arrayDatosDiv.get(2), arrayDatosDiv.get(3), 
+		            		arrayDatosDiv.get(4))
+		            
+
+		        );
+			colNombre.setCellValueFactory(   new PropertyValueFactory <Persona, String>("nombre"));
+			colApellido1.setCellValueFactory(new PropertyValueFactory <Persona, String>("primerApellido"));
+			colApellido2.setCellValueFactory(new PropertyValueFactory <Persona, String>("segundoApellido"));
+			colCiudad.setCellValueFactory(   new PropertyValueFactory <Persona, String>("cidudadNatal"));
+			colGenero.setCellValueFactory(   new PropertyValueFactory <Persona, String>("genero"));
+			
+			tablaDatosPerso.setItems(datosOptDiv);
+
+			
+			System.out.println();
+
+		buferLectura.close();
+		leeArchivo.close();
+			
+		
+
+	}catch (Exception e) {
+		
+		Alert archivoPerdido = new Alert(Alert.AlertType.WARNING);
+		archivoPerdido.setTitle("Error carga datos" );
+		archivoPerdido.setHeaderText("Archivo no se encuentra en la ruta");
+		archivoPerdido.setContentText("No se encuentra el archivo a cargar , por favor guarde"
+				+ "\n la informacion,despues precione el boton mostrar"
+				+ "\n " + e);
+		
+		archivoPerdido.show();
+	}
+		
+			
 		
 	}
+	
+	
 	
 
 	@Override

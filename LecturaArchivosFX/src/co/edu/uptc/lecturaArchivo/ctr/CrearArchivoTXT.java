@@ -18,12 +18,12 @@ import javafx.scene.control.Alert.AlertType;
 public class CrearArchivoTXT {
 	
 	public void creaArchivo(Persona DtsPersona, String nbreArchivo) throws IOException {
-		try {
+		
 			File				rutaArchivo;
 			FileWriter			fWAchivo;
 			BufferedWriter  	buferEscritura;
 			PrintWriter			escribeArchivo;
-			
+			try {
 			
 			rutaArchivo		= new File("C:\\Users\\Usuario\\Desktop\\"+nbreArchivo+".txt");
 			fWAchivo   		= new FileWriter(rutaArchivo);
@@ -37,12 +37,12 @@ public class CrearArchivoTXT {
 			ObservableList<String> obListDtsPersona = FXCollections.observableList(listaDatosPerso);
 		
 				if (obListDtsPersona.isEmpty()) {
-					obListDtsPersona.add( DtsPersona.getNombre());
-					obListDtsPersona.add(" | "+ DtsPersona.getPrimerApellido());
-					obListDtsPersona.add(" | "+ DtsPersona.getSegundoApellido());
-					obListDtsPersona.add(" | "+ DtsPersona.getCidudadNatal());
-					obListDtsPersona.add(" | "+ DtsPersona.getGenero());
-					obListDtsPersona.add("\n ");
+					obListDtsPersona.add(DtsPersona.getNombre());
+					obListDtsPersona.add("|" + DtsPersona.getPrimerApellido());
+					obListDtsPersona.add("|" + DtsPersona.getSegundoApellido());
+					obListDtsPersona.add("|" + DtsPersona.getCidudadNatal());
+					obListDtsPersona.add("|" + DtsPersona.getGenero());
+					obListDtsPersona.add("\n");
 					
 					// Escribe los datos en el archivo de texto, tomados de la ObservableList
 					escribeArchivo.write(obListDtsPersona.get(0).toString().toUpperCase());

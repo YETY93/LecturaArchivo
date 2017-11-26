@@ -171,7 +171,7 @@ public class CtrDatosPersonales implements Initializable {
 		            new Persona(arrayDatosDiv.get(0), arrayDatosDiv.get(1),  
 		            		arrayDatosDiv.get(2), arrayDatosDiv.get(3), 
 		            		arrayDatosDiv.get(4))
-		            
+		           
 
 		        );
 			colNombre.setCellValueFactory(   new PropertyValueFactory <Persona, String>("nombre"));

@@ -149,11 +149,11 @@ public class CtrDatosPersonales implements Initializable {
 			
 			while ((strDats = buferLectura.readLine())!= null ) {
 				String[] divisionDatos = strDats.split(separador);
-				arrayDatosDiv.add(divisionDatos[0]);
-				arrayDatosDiv.add(divisionDatos[1]);
-				arrayDatosDiv.add(divisionDatos[2]);
-				arrayDatosDiv.add(divisionDatos[3]);
-				arrayDatosDiv.add(divisionDatos[4]);
+				arrayDatosDiv.add(divisionDatos[0].toUpperCase());
+				arrayDatosDiv.add(divisionDatos[1].toUpperCase());
+				arrayDatosDiv.add(divisionDatos[2].toUpperCase());
+				arrayDatosDiv.add(divisionDatos[3].toUpperCase());
+				arrayDatosDiv.add(divisionDatos[4].toUpperCase());
 				
 
 				
